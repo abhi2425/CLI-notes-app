@@ -1,6 +1,7 @@
 const fs = require("fs");
 const chalk = require("chalk");
 
+
 module.exports = {
     addNotes: addNotes,
     removeNotes: removeNotes,
