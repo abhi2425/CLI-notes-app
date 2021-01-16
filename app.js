@@ -1,62 +1,60 @@
-const yargs = require("yargs");
-const notes = require("./notes");
+const yargs = require('yargs')
+const { listNotes, removeNotes, addNotes, readNotes } = require('./notes')
 yargs.command({
-    command: "add",
-    descibe: "Adding A nOte",
-    builder: {
-        title: {
-            descibe: "This is My Title",
-            demandOption: true,
-            type: "string"
-        },
-        body: {
-            descibe: "This is My Body",
-            type: "string"
-        }
-
+  command: 'add',
+  describe: 'Adding A note',
+  builder: {
+    title: {
+      describe: 'This is My Title',
+      demandOption: true,
+      type: 'string',
     },
-    handler(argv) {
-        notes.addNotes(argv.title, argv.body);
-    }
-})
-
-yargs.command({
-    command: "list",
-    descibe: "listing A nOte",
-    handler: function() {
-        notes.listNodes();
-    }
-})
-
-yargs.command({
-    command: "remove",
-    descibe: "Deleting A nOte",
-    builder: {
-        title: {
-            descibe: "This is My Title",
-            demandOption: true,
-            type: "string"
-        }
-
+    body: {
+      describe: 'This is My Body',
+      type: 'string',
     },
-    handler(argv) {
-        notes.removeNotes(argv.title);
-    }
-})
-debugger;
-yargs.command({
-    command: "read",
-    descibe: "reading A nOte",
-    builder: {
-        title: {
-            describe: "Title",
-            type: "string",
-            demandOption: true
-        }
-    },
-    handler(argv) {
-        notes.readNotes(argv.title);
-    }
+  },
+  handler(argv) {
+    addNotes(argv.title, argv.body)
+  },
 })
 
-yargs.parse();
+yargs.command({
+  command: 'list',
+  describe: 'listing A note',
+  handler: function () {
+    listNotes()
+  },
+})
+
+yargs.command({
+  command: 'remove',
+  describe: 'Deleting A note',
+  builder: {
+    title: {
+      describe: 'This is My Title',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    removeNotes(argv.title)
+  },
+})
+debugger
+yargs.command({
+  command: 'read',
+  describe: 'reading A note',
+  builder: {
+    title: {
+      describe: 'Title',
+      type: 'string',
+      demandOption: true,
+    },
+  },
+  handler(argv) {
+    readNotes(argv.title)
+  },
+})
+
+yargs.parse()
